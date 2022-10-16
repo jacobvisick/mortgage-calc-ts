@@ -1,0 +1,81 @@
+:root {
+    --ms-primary-color: #001e43;
+    --ms-secondary-color: rgb(255, 153, 59);
+    --ms-dark-color: #1b1b1b;
+    --ms-light-color: #dfe3e4;
+
+    --ms-navbar-toggler-glow: rgba(255, 153, 59, 0.6);
+    --ms-navbar-toggler-color: rgb(255, 155, 59);
+}
+
+/* BEGIN: footer layout */
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1 0 auto;
+    margin-top: 4.75rem;
+}
+
+footer {
+    flex-shrink: 0;
+}
+/* END: footer layout */
+
+.footer {
+    background: var(--ms-primary-color);
+    color: var(--ms-light-color);
+}
+
+.socialIcons {
+    color: var(--ms-light-color);
+    font-size: 2rem;
+}
+
+.socialIcons:hover {
+    color: var(--ms-secondary-color);
+}
+
+#mainNav {
+    background-color: var(--ms-primary-color);
+}
+
+#mainNav button {
+    border-color: var(--ms-secondary-color);
+}
+
+.navbar-toggler {
+    color: var(--ms-navbar-toggler-glow) !important;
+}
+
+.navbar-toggler-icon-ms {
+    color: var(--ms-navbar-toggler-color);
+    font-size: 1.5rem;
+}
+
+.checklist {
+    list-style-type: none;
+}
+
+.checklist > li i {
+    color: var(--ms-secondary-color);
+}
+
+.devIcons {
+    font-size: 2.5rem;
+}
+
+#monthly-payment {
+    font-size: 4rem;
+}
+
+.border, .table-responsive {
+    border-radius: 1rem;
+}
