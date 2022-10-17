@@ -1,3 +1,4 @@
+// define the shape of the object we'll be passing around
 interface MonthlyPayment {
     month: number;
     principal: number;
@@ -14,6 +15,7 @@ interface LoanTotals {
 }
 
 function getValues() {
+    // let TypeScript know that these are Inputs, not a generic HTMLElement
     let amountInput = document.getElementById('amount') as HTMLInputElement
     let termInput = document.getElementById('term') as HTMLInputElement
     let rateInput = document.getElementById('rate') as HTMLInputElement
@@ -23,6 +25,7 @@ function getValues() {
     let rate = Number(rateInput.value) / 1200;
 
     if (!amount || !term || !rate || isNaN(amount) || isNaN(term) || isNaN(rate)) {
+        // use this syntax to let TypeScript ignore this, since TS doesn't know what Swal is
         // @ts-ignore
         Swal.fire({
             icon: 'error',
@@ -49,6 +52,7 @@ function getValues() {
     displayPayments(loanTotals.monthlyPayment, payments);
 }
 
+// return an object described by interface LoanTotals
 function calculateTotals(amount: number, term: number, rate: number): LoanTotals {
     let monthlyPayment = (amount * rate) / (1 - Math.pow((1 + rate), -term));
 
@@ -62,6 +66,8 @@ function calculateTotals(amount: number, term: number, rate: number): LoanTotals
     return loanTotals;
 }
 
+// return a ReadOnlyArray, since we'll never need to change these values after this function
+// the array contains objects described by the interface MonthlyPayment
 function calculatePayments(monthlyPayment: number, amount: number, term: number, rate: number): ReadonlyArray<MonthlyPayment> {
     let payments: MonthlyPayment[] = [];
     
@@ -90,6 +96,8 @@ function calculatePayments(monthlyPayment: number, amount: number, term: number,
     return payments;
 }
 
+
+// object destructuring - assinging the object's properties (of type LoanTotals) to local variables
 function displayTotals({ monthlyPayment, principal, interest, cost }: LoanTotals) {
     let stringOptions: Intl.NumberFormatOptions = {
         style: 'currency',
@@ -110,6 +118,7 @@ function displayTotals({ monthlyPayment, principal, interest, cost }: LoanTotals
     document.getElementById('totals')?.classList.remove('d-none');
 }
 
+// pass this the monthlyPayment separately from array of payments, since it is the same for every month
 function displayPayments(monthlyPayment: number, payments: ReadonlyArray<MonthlyPayment>) {
     let options: Intl.NumberFormatOptions = {
         style: 'currency',
@@ -138,7 +147,7 @@ function displayPayments(monthlyPayment: number, payments: ReadonlyArray<Monthly
     paymentTable.lastElementChild?.classList.add('table-success');
 }
 
-function resetView() {
+function resetView(): void {
     document.querySelector('form')?.reset();
 
     let amountInput = document.getElementById('amount') as HTMLInputElement;
